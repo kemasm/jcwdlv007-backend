@@ -5,7 +5,7 @@ const jsonParser = bodyParser.json()
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(jsonParser);
 const cors = require("cors");
-const { userRoutes } = require("./routes");
+const { userRoutes, moviesRoutes } = require("./routes");
 const corsOptions = {
   origin: "*",
   credentials: true, //access-control-allow-credentials:true
@@ -88,6 +88,8 @@ const order = [
 
 
 app.use("/user_accounts", userRoutes)
+app.use("/movies", moviesRoutes)
+
 // localhost:2000/user_accounts/
 
 app.get("/products/", (req,res)=> {
