@@ -1,0 +1,54 @@
+
+model = table
+model ini akan kita jadikan sebagai table => 
+database first = memiliki database terlebih dahulu,
+ baru kita sesuaikan dengan codingannya 
+
+code first = 
+menentukan table kita berdasarkan codingan ( models )
+
+models = property yang ada di dalam sebuah table
+
+user = property/kolom dari sebuah table user
+
+export models kita dan kita jadikan sequelize 
+
+memanggil sequelize ke dalam index.js
+sequelize.sync (alter = true)
+
+maka sequelize akan memberi perintah ke dalam database 
+ciptakan sebuah table berdasarkan model yang di export 
+models => sequelize => alter = true => generate table in db
+
+npm i sequelize
+npm i mysql2
+
+6 models 
+actor (id,name,sex,age,bio)
+genre (id,genre)
+movies (film_name,duration,year_released,rating,img_src,about,studio_id)
+studio (id,studio_name)
+movie_actor (id,movieId,actorId)
+movie_genre (id,movieId,genreId)
+export models
+
+lib/sequelize
+import models
+model wrap ke dalam sequelize
+
+format table sequelize
+(id, createdAt, updatedAt )
+     datetime,   datetime
+
+get,post,delete,patch
+
+
+export sequelize(models)
+
+index.js
+import sequelize
+sequelize.sync(alter = true)
+
+sequelize memberi perintah ke database untuk 
+create(generate table) /alter(update table)
+

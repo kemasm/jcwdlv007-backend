@@ -1,7 +1,8 @@
 const { db, dbQuery } = require("../database/");
 const qs = require("qs");
 const { parse } = require("qs");
-
+const { Movie, sequelize} = require("../lib/sequelize");
+const { Op } = require("sequelize");
 const moviesController = {
 getMovies: async  (req,res) => {
     const movie = req.query.movie;
@@ -31,6 +32,25 @@ getActorByMovieId: async  (req,res) => {
     const resDb = await dbQuery(sqlQuery);
    return res.send(resDb);
 },
+getMovies2 : async (req,res) => {
+    const movie = req.query.movie;
+
+    const movies = await Movie.findOne({
+        where : {
+           film_name : {
+           [Op.like] : `%${movie}%`
+           }
+//    select * from movies where film_name like '%movie%'
+
+        }
+    })
+
+    return res.send(movies)
+}
+
 }
 
 module.exports = moviesController;
+
+
+

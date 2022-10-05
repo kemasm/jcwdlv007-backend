@@ -60,31 +60,11 @@ const products = [
       }
 ]
 
-// const user_accounts= [
-//   {
-//     id: 1,
-//     email: "jordan@mail.com",
-//     password: "Pass123;",
-//     name: "Jordan2",
-//     username: "Jordanjoe3",
-//     bio: "halo halo bandung",
-//     role: "admin",
-//     avatar_url: "https://assets3.thrillist.com/v1/image/1595742/828x610/flatten;crop;webp=auto;jpeg_quality=60.jpg"
-//   },
-//   {
-//     id: 2,
-//     email: "admin@mail.com",
-//     password: "Pass123;",
-//     name: "Admin",
-//     username: "Admin",
-//     bio: "halo this is admin",
-//     role: "admin",
-//     avatar_url: "https://thumbs.dreamstime.com/b/admin-sign-laptop-icon-stock-vector-166205404.jpg"
-//   }
-// ]
 const cart = []
 const order = [
 ]
+const { sequelize } = require("./lib/sequelize");
+// sequelize.sync({ alter: true });
 
 
 app.use("/user_accounts", userRoutes)
