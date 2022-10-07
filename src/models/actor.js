@@ -15,7 +15,11 @@ const Actor = (sequelize) => {
       allowNull: true,
     },
     bio: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    img_src: {
+      type: DataTypes.TEXT,
       allowNull: true,
     },
   });

@@ -5,7 +5,7 @@ const jsonParser = bodyParser.json()
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(jsonParser);
 const cors = require("cors");
-const { userRoutes, moviesRoutes } = require("./routes");
+const { userRoutes, moviesRoutes, actorsRoutes, genreRoutes } = require("./routes");
 const corsOptions = {
   origin: "*",
   credentials: true, //access-control-allow-credentials:true
@@ -64,11 +64,15 @@ const cart = []
 const order = [
 ]
 const { sequelize } = require("./lib/sequelize");
-// sequelize.sync({ alter: true });
+sequelize.sync({ alter: true });
 
 
 app.use("/user_accounts", userRoutes)
 app.use("/movies", moviesRoutes)
+app.use("/actors", actorsRoutes)
+app.use("/genres", genreRoutes)
+
+
 
 // localhost:2000/user_accounts/
 

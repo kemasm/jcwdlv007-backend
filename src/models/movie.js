@@ -19,13 +19,14 @@ const Movie = (sequelize) => {
       allowNull: true,
     },
     img_src: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     about: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
+   
   });
 };
 

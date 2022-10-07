@@ -27,17 +27,23 @@ Studio.hasMany(Movie, { foreignKey: "studioId"})
 
 //Movie Genre 
 // m : m 
-Movie.hasMany(Movie_Genre, { foreignKey: "MovieId" });
-Movie_Genre.belongsTo(Movie, { foreignKey: "MovieId" });
-Genre.hasMany(Movie_Genre, { foreignKey: "GenreId" });
-Movie_Genre.belongsTo(Genre, { foreignKey: "GenreId" });
+// Movie.hasMany(Movie_Genre, { foreignKey: "MovieId" });
+// Movie_Genre.belongsTo(Movie, { foreignKey: "MovieId" });
+// Genre.hasMany(Movie_Genre, { foreignKey: "GenreId" });
+// Movie_Genre.belongsTo(Genre, { foreignKey: "GenreId" });
+Movie.belongsToMany(Genre , { through: Movie_Genre ,foreignKey: "MovieId",unique: false })
+Genre.belongsToMany(Movie , { through: Movie_Genre ,foreignKey: "Genre", unique: false })
+
 
 //Movie Actor 
 // m : m 
-Movie.hasMany(Movie_Actor, { foreignKey: "MovieId" });
-Movie_Actor.belongsTo(Movie, { foreignKey: "MovieId" });
-Actor.hasMany(Movie_Actor, { foreignKey: "ActorId" });
-Movie_Actor.belongsTo(Actor, { foreignKey: "ActorId" });
+// Movie.hasMany(Movie_Actor, { foreignKey: "MovieId" });
+// Movie_Actor.belongsTo(Movie, { foreignKey: "MovieId" });
+// Actor.hasMany(Movie_Actor, { foreignKey: "ActorId" });
+// Movie_Actor.belongsTo(Actor, { foreignKey: "ActorId" });
+Movie.belongsToMany(Actor , { through: Movie_Actor ,foreignKey: "MovieId", unique: false })
+Actor.belongsToMany(Movie , { through: Movie_Actor ,foreignKey: "ActorId", unique: false })
+
 
 
 module.exports = {
