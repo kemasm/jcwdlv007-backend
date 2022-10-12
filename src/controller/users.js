@@ -12,7 +12,7 @@ getLogin: async  (req,res) => {
 },
 register: async (req,res) => {
     const data = await (req.body)
-    console.log(qs.stringify(data))
+    console.log(qs.parse(data))
     console.log(data);
     let sqlQuery = `insert into users (email,password,name,username,bio,role,avatar_url) 
     values ( '${data.email}', '${data.password}', '${data.name}', '${data.username}', '${data.bio}' , '${data.role}' , '${data.avatar_url}' )` 

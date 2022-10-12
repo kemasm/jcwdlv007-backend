@@ -15,6 +15,29 @@ getActors : async (req,res) => {
     });
 
     return res.send(actors)
+}, 
+addActor : async (req,res) => {
+    const { name, sex, age,bio } = req.body;
+    const uploadFileDomain = "http://localhost:2000";
+    const filePath = "post_images";
+    const { filename } = req.file;
+
+    // const newActor = await Actor.create({
+    //     ...req.body
+    // })
+
+    //dengan catatan req.body isinya = nama kolom di database/model
+
+    img_src = `http://localhost:2000/post_images/POST_QWER1234.jpeg`
+    const newActor = await Actor.update({
+        name,
+        sex,
+        age,
+        bio,
+        img_src:`${uploadFileDomain}/${filePath}/${filename}`,
+    })
+
+    return res.send(newActor)
 }
 
 }

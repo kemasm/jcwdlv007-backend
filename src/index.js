@@ -64,7 +64,7 @@ const cart = []
 const order = [
 ]
 const { sequelize } = require("./lib/sequelize");
-sequelize.sync({ alter: true });
+// sequelize.sync({ alter: true });
 
 
 app.use("/user_accounts", userRoutes)
@@ -72,7 +72,13 @@ app.use("/movies", moviesRoutes)
 app.use("/actors", actorsRoutes)
 app.use("/genres", genreRoutes)
 
+app.use("/post_images", express.static(`${__dirname}/public/post_images`));
+// c:/nama_project_be/src/public/post_images/
+// localhost:2000/post_images/
 
+//1. frontend 
+//2. routes => middleware => controller 
+//3. express.static => menampilkan image file dari dalam folder di backend
 
 // localhost:2000/user_accounts/
 

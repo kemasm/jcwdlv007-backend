@@ -46,7 +46,6 @@ getMovies2 : async (req,res) => {
             through: { attributes: [] }
           }
             ]
-        
         ,
         where : {
            film_name : {
