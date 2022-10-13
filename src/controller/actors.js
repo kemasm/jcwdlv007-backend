@@ -28,7 +28,6 @@ addActor : async (req,res) => {
 
     //dengan catatan req.body isinya = nama kolom di database/model
 
-    img_src = `http://localhost:2000/post_images/POST_QWER1234.jpeg`
     const newActor = await Actor.update({
         name,
         sex,

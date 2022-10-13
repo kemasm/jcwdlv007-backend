@@ -3,6 +3,8 @@ const qs = require("qs");
 const { parse } = require("qs");
 const { Movie,Actor,Studio,Genre, Movie_Actor,Movie_Genre, sequelize} = require("../lib/sequelize");
 const { Op } = require("sequelize");
+const fs = require('fs')
+
 const moviesController = {
 getMovies: async  (req,res) => {
     const movie = req.query.movie;
@@ -57,6 +59,105 @@ getMovies2 : async (req,res) => {
     })
 
     return res.send(movies)
+},
+addMovie : async (req,res) => {
+    const { film_name, duration, year_released,rating, about,studioId} = req.body;
+    const uploadFileDomain = "http://localhost:2000";
+    const filePath = "movie_images";
+    const { filename } = req.file;
+
+    const newActor = await Movie.create({
+          film_name,
+          duration,
+          year_released,
+          rating,
+          img_src : `${uploadFileDomain}/${filePath}/${filename}`,
+          about,
+          studioId
+    })
+
+    return res.send(newActor)
+},
+deleteMovie : async (req,res) => {
+    const {id, old_img } = req.body
+    console.log(req.body)
+
+    await Movie.destroy({
+        where: {
+            id
+        }
+    })
+
+    console.log(old_img)
+
+    const path =`${__dirname}/../public/movie_images/${old_img}`
+    console.log(path)
+
+//file system
+// library yang dapat mengakses directory/file yg ada di sistem/server
+fs.unlink(path, (err) => {
+  if (err) {
+    console.error(err)
+    return
+  }
+
+  //file removed
+})
+    return res.send("movie deleted")
+},
+editMovie: async (req,res) => {
+    const { film_name, duration, year_released,rating, about,studioId,old_img,id} = req.body;
+    const uploadFileDomain = "http://localhost:2000";
+    const filePath = "movie_images";
+
+    let editData = {};
+
+    if(req.file?.filename)
+    {
+        // ada perubahan gambar
+        const { filename } = req.file;
+
+        const path =`${__dirname}/../public/movie_images/${old_img}`
+        fs.unlink(path, (err) => {
+            if (err) {
+              console.error(err)
+              return
+            }
+          
+            //file removed
+          })
+        
+
+        editData = {
+            film_name,
+            duration,
+            year_released,
+            rating,
+            img_src : `${uploadFileDomain}/${filePath}/${filename}`,
+            about,
+            studioId
+      }
+      
+    }
+    else
+    {
+        editData = {
+            film_name,
+            duration,
+            year_released,
+            rating,
+            about,
+            studioId
+      }
+        
+    }
+         await Movie.update(
+       { ...editData }, {
+            where: {id}
+            }
+         )
+
+    return res.send("movie edited");
 }
 
 }

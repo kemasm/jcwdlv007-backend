@@ -5,7 +5,7 @@ const jsonParser = bodyParser.json()
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(jsonParser);
 const cors = require("cors");
-const { userRoutes, moviesRoutes, actorsRoutes, genreRoutes } = require("./routes");
+const { userRoutes, moviesRoutes, actorsRoutes, genreRoutes, studiosRoutes } = require("./routes");
 const corsOptions = {
   origin: "*",
   credentials: true, //access-control-allow-credentials:true
@@ -72,7 +72,12 @@ app.use("/movies", moviesRoutes)
 app.use("/actors", actorsRoutes)
 app.use("/genres", genreRoutes)
 
+app.use("/studios", studiosRoutes)
+
+
 app.use("/post_images", express.static(`${__dirname}/public/post_images`));
+app.use("/movie_images", express.static(`${__dirname}/public/movie_images`));
+
 // c:/nama_project_be/src/public/post_images/
 // localhost:2000/post_images/
 
@@ -142,6 +147,7 @@ app.post("/products",jsonParser, (req,res)=> {
     res.send(data)
 
 })
+
 
 //front end
 //method get,patch,post,delete 
