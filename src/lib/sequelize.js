@@ -11,6 +11,7 @@ const sequelize = new Sequelize({
   
 
 //models
+const User = require("../models/user")(sequelize);
 const Actor = require("../models/actor")(sequelize);
 const Genre = require("../models/genre")(sequelize);
 const Movie = require("../models/movie")(sequelize);
@@ -53,7 +54,8 @@ module.exports = {
   Movie,
   Studio,
   Movie_Actor,
-  Movie_Genre
+  Movie_Genre,
+  User
   };
 
 
