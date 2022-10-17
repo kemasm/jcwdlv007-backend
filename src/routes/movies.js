@@ -7,6 +7,8 @@ const fileUploader = require("../lib/uploader");
 
 router.get("/", moviesController.getMovies);
 router.get("/v2/", moviesController.getMovies2);
+router.get("/v2/paging", moviesController.getMoviesPaging);
+
 
 router.get("/actor/:id", moviesController.getActorByMovieId);
 router.get("/genre/:id", moviesController.getGenreByMovieId);

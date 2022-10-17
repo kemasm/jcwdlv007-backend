@@ -158,7 +158,49 @@ editMovie: async (req,res) => {
          )
 
     return res.send("movie edited");
-}
+},
+getMoviesPaging: async (req, res) => {
+    try {
+        console.log(req.query)
+      const { limit = 1, page = 1, movie } = req.query;
+      //limit sebagai limit
+      //page sebagai offset
+      //1 - 1 * 1 = 0 berarti kita akan memulai dari offset 0
+      //2-1 * 1 = 1 berarti start offset dari 1 
+
+      const findPost = await Movie.findAll({
+        offset: (page - 1) * limit,
+        limit: limit ? parseInt(limit) : undefined,
+        include: [{
+            model: Genre,
+            through: { attributes: [] }
+          },
+          {
+            model: Actor,
+            through: { attributes: [] }
+          }
+            ]        ,
+            where : {
+               film_name : {
+               [Op.like] : `%${movie}%`
+               }    
+            }
+      },
+      
+      
+      );
+
+      return res.send(
+        findPost
+      );
+    } catch (err) {
+      console.log(err);
+
+      res.status(400).json({
+        message: "error ",
+      });
+    }
+  },
 
 }
 
